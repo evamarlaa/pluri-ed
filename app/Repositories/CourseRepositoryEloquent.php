@@ -2,9 +2,9 @@
 
 namespace App\Repositories;
 
-use Prettus\Repository\Eloquent\BaseRepository;
+use App\Presenters\CoursePresenter;
+use App\Services\Traits\SoftDeletes;
 use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\CourseRepository;
 use App\Entities\Course;
 use App\Validators\CourseValidator;
 
@@ -13,8 +13,17 @@ use App\Validators\CourseValidator;
  *
  * @package namespace App\Repositories;
  */
-class CourseRepositoryEloquent extends BaseRepository implements CourseRepository
+class CourseRepositoryEloquent extends AppRepository implements CourseRepository
 {
+    use SoftDeletes;
+
+    /**
+     * @var array
+     */
+    protected $fieldSearchable = [
+        'id'
+    ];
+
     /**
      * Specify Model class name
      *
@@ -32,17 +41,22 @@ class CourseRepositoryEloquent extends BaseRepository implements CourseRepositor
     */
     public function validator()
     {
-
         return CourseValidator::class;
     }
 
-
     /**
-     * Boot up the repository, pushing criteria
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
+
+    /**
+     * @return mixed
+     */
+    public function presenter()
+    {
+        return CoursePresenter::class;
+    }
 }

@@ -22,7 +22,8 @@ class CreateEnrollmentsTable extends Migration
             $table->integer('course_id')->unsigned();
             $table->foreign('course_id')->references('id')->on('courses');
             $table->timestamps();
-		});
+            $table->softDeletes();
+        });
 	}
 
 	/**

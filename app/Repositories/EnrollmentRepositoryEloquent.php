@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Presenters\EnrollmentPresenter;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\EnrollmentRepository;
@@ -13,7 +14,7 @@ use App\Validators\EnrollmentValidator;
  *
  * @package namespace App\Repositories;
  */
-class EnrollmentRepositoryEloquent extends BaseRepository implements EnrollmentRepository
+class EnrollmentRepositoryEloquent extends AppRepository implements EnrollmentRepository
 {
     /**
      * Specify Model class name
@@ -32,7 +33,6 @@ class EnrollmentRepositoryEloquent extends BaseRepository implements EnrollmentR
     */
     public function validator()
     {
-
         return EnrollmentValidator::class;
     }
 
@@ -44,5 +44,12 @@ class EnrollmentRepositoryEloquent extends BaseRepository implements EnrollmentR
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-    
+
+    /**
+     * @return mixed
+     */
+    public function presenter()
+    {
+        return EnrollmentPresenter::class;
+    }
 }

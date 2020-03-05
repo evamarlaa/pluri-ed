@@ -112,5 +112,5 @@ trait CrudMethods
             'data' => $this->repository->delete($id)
         ];
     }
-    
+
 }

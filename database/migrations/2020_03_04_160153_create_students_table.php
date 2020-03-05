@@ -22,7 +22,8 @@ class CreateStudentsTable extends Migration
             $table->char('gender');
             $table->date('birthday');
             $table->timestamps();
-		});
+            $table->softDeletes();
+        });
 	}
 
 	/**

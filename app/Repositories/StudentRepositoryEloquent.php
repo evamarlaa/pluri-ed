@@ -2,6 +2,8 @@
 
 namespace App\Repositories;
 
+use App\Presenters\StudentPresenter;
+use App\Services\Traits\SoftDeletes;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\StudentRepository;
@@ -13,8 +15,10 @@ use App\Validators\StudentValidator;
  *
  * @package namespace App\Repositories;
  */
-class StudentRepositoryEloquent extends BaseRepository implements StudentRepository
+class StudentRepositoryEloquent extends AppRepository implements StudentRepository
 {
+    use SoftDeletes;
+
     /**
      * @var array
      */
@@ -40,17 +44,23 @@ class StudentRepositoryEloquent extends BaseRepository implements StudentReposit
     */
     public function validator()
     {
-
         return StudentValidator::class;
     }
 
-
     /**
-     * Boot up the repository, pushing criteria
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    /**
+     * @return mixed
+     */
+    public function presenter()
+    {
+        return StudentPresenter::class;
     }
 
 }

@@ -18,7 +18,15 @@ class StudentValidator extends LaravelValidator
      * @var array
      */
     protected $rules = [
-        ValidatorInterface::RULE_CREATE => [],
-        ValidatorInterface::RULE_UPDATE => [],
+        ValidatorInterface::RULE_CREATE => [
+            'name'      => 'required|max:150',
+            'email'     => 'required|email|max:100',
+            'birthday'  => 'required|date',
+        ],
+        ValidatorInterface::RULE_UPDATE => [
+            'name'      => 'required|max:150',
+            'email'     => 'required|email|max:100',
+            'birthday'  => 'required|date',
+        ],
     ];
 }

@@ -18,7 +18,13 @@ class EnrollmentValidator extends LaravelValidator
      * @var array
      */
     protected $rules = [
-        ValidatorInterface::RULE_CREATE => [],
-        ValidatorInterface::RULE_UPDATE => [],
+        ValidatorInterface::RULE_CREATE => [
+            'student_id'    => 'exists:students,id',
+            'course_id'     => 'exists:courses,id',
+        ],
+        ValidatorInterface::RULE_UPDATE => [
+            'student_id'    => 'exists:students,id',
+            'course_id'     => 'exists:courses,id',
+        ],
     ];
 }

@@ -9,7 +9,7 @@ use App\Services\Traits\CrudMethods;
  * Class StudentService
  * @package App\Services
  */
-class StudentService
+class StudentService extends AppService
 {
     use CrudMethods {
         all    as public processAll;
@@ -21,8 +21,29 @@ class StudentService
      */
     protected $repository;
 
+    /**
+     * StudentService constructor.
+     * @param StudentRepository $repository
+     */
     public function __construct(StudentRepository $repository)
     {
         $this->repository = $repository;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param int $limit
+     * @return array|mixed
+     */
+    public function all($limit = 20)
+    {
+        $this->repository
+            ->resetCriteria()
+            ->pushCriteria(app('App\Criterias\FilterStudentsByEmail'))
+            ->pushCriteria(app('App\Criterias\FilterStudentsByName'))
+            ->pushCriteria(app('App\Criterias\FilterStudentsByAgeGroup'));
+
+        return $this->returnSuccess($this->processAll($limit));
     }
 }
