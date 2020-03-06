@@ -35,4 +35,12 @@ class Student extends Model implements Transformable
         'updated_at',
         'deleted_at',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function enrollments()
+    {
+        return $this->hasMany(Enrollment::class);
+    }
 }

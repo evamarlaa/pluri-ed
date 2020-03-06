@@ -34,4 +34,19 @@ class Enrollment extends Model implements Transformable
         'deleted_at',
     ];
 
+    /**
+     * @return mixed
+     */
+    public function student()
+    {
+        return $this->hasOne(Student::class);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function course()
+    {
+        return $this->hasOne(Course::class);
+    }
 }

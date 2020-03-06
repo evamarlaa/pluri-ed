@@ -19,6 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::resource('students',            'StudentsController', ['except' => ['create', 'edit', 'update', 'show']]);
 Route::delete('/students/{id}/trash',  'StudentsController@trash');
+Route::get('/filter-students-by-age-group',  'StudentsController@filterStudentsByAgeGroup');
+
 
 Route::resource('courses',            'CoursesController', ['except' => ['create', 'edit', 'update', 'show']]);
 Route::delete('/courses/{id}/trash',  'CoursesController@trash');

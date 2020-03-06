@@ -30,20 +30,29 @@ class StudentService extends AppService
         $this->repository = $repository;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @param int $limit
-     * @return array|mixed
-     */
-    public function all($limit = 20)
-    {
-        $this->repository
-            ->resetCriteria()
-            ->pushCriteria(app('App\Criterias\FilterStudentsByEmail'))
-            ->pushCriteria(app('App\Criterias\FilterStudentsByName'))
-            ->pushCriteria(app('App\Criterias\FilterStudentsByAgeGroup'));
+    //TENTATIVA DE USAR CRITERIAS, MAS COM O TEMPO CURTO NÃO CONSEGUI IDENTIFICAR A INCOMPATIBILIDADE QUE OCORREU
+//    /**
+//     * Display a listing of the resource.
+//     *
+//     * @param int $limit
+//     * @return array|mixed
+//     */
+//    public function all($limit = 20)
+//    {
+//        $this->repository
+//            ->resetCriteria()
+//            ->pushCriteria(app('App\Criterias\FilterStudentsByEmail'))
+//            ->pushCriteria(app('App\Criterias\FilterStudentsByName'))
+//            ->pushCriteria(app('App\Criterias\FilterStudentsByAgeGroup'));
+//
+//        return $this->returnSuccess($this->processAll($limit));
+//    }
 
-        return $this->returnSuccess($this->processAll($limit));
+    /**
+     * @return mixed
+     */
+    public function filterStudentsByAgeGroup()
+    {
+        return $this->repository->filterStudentsByAgeGroup();
     }
 }

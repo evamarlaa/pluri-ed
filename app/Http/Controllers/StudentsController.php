@@ -37,4 +37,12 @@ class StudentsController extends Controller
         $this->service      = $service;
         $this->validator    = $validator;
     }
+
+    /**
+     * @return mixed
+     */
+    public function filterStudentsByAgeGroup()
+    {
+        return $this->service->filterStudentsByAgeGroup();
+    }
 }

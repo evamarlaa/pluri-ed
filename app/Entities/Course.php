@@ -34,4 +34,11 @@ class Course extends Model implements Transformable
         'deleted_at',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function enrollments()
+    {
+        return $this->belongsToMany(Enrollment::class);
+    }
 }
